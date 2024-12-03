@@ -1,32 +1,32 @@
-// computer choices
 let humanScore = 0
 let computerScore = 0
 
+
 function getComputerChoice() {
-  let random = Math.floor(Math.random() * 3);
-  if (random === 1) {
-    return "rock"
-  } 
-  else if (random === 2) {
-    return "paper"
-  }
-  else {
-    return "scissors"
-  }
-  return result
+  const choices = ["rock", "paper", "scissors"];
+  const randomIndex = Math.floor(Math.random() * choices.length);
+  return choices[randomIndex];
 }
+
+console.log("Computer's choice", getComputerChoice())
+
+
+
 
 function getHumanChoice() {
-
-  let question = prompt("What is your choice?")
-  if (choices === rock || choice === paper || choice === scissors) {
-    console.log(choice)
+  const choice = prompt("Please enter your choice (rock, paper, or scissors):");
+  if (choice !== "rock" && choice !== "paper" && choice !== "scissors") {
+    console.log("Invalid choice.");
+    return getHumanChoice();
   }
-  else { console.log("Invalid choice, try again") }
-  return result
+  return choice;
 }
+console.log("Human's choice", getHumanChoice())
 
-function playRound(humanChoice, computerChoice) {
+
+
+
+function playRound(humanChoice, computerChoice, playerScore) {
   console.log(humanChoice, computerChoice);
 
   if (humanChoice === "rock" && computerChoice === "scissors") {
