@@ -1,6 +1,5 @@
-let humanScore = 0
-let computerScore = 0
-
+let playerScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
@@ -8,10 +7,7 @@ function getComputerChoice() {
   return choices[randomIndex];
 }
 
-console.log("Computer's choice", getComputerChoice())
-
-
-
+console.log("Computer's choice", getComputerChoice());
 
 function getHumanChoice() {
   const choice = prompt("Please enter your choice (rock, paper, or scissors):");
@@ -21,14 +17,14 @@ function getHumanChoice() {
   }
   return choice;
 }
-console.log("Human's choice", getHumanChoice())
-
-
-
+console.log("Human's choice", getHumanChoice());
 
 function playRound(humanChoice, computerChoice, playerScore) {
   console.log(humanChoice, computerChoice);
+  const resultDiv = document.getElementById("result");
+  const scoreDiv = document.getElementById("score")
 
+  let resultMessage;
   if (humanChoice === "rock" && computerChoice === "scissors") {
     console.log(`I win ${humanChoice} beats ${computerChoice}`);
     playerScore++;
@@ -56,17 +52,32 @@ function playRound(humanChoice, computerChoice, playerScore) {
     console.log("Tied!");
   }
   console.log(playerScore, computerScore);
-}
-for (let i = 0; i <= 5; i++) {
-  playRound(getHumanChoice(), getComputerChoice());
-}
-
-if (playerScore > computerScore) {
-  alert("Human player is the Winner!");
-} else if (computerScore > playerScore) {
-  alert("Computer is the Winner!");
-} else {
-  alert("No one wins, Tied!");
+  resultDiv.innerText = ` 
+  <p>Player selected: ${humanChoice}</p>
+  <p>Computer selected: ${computerChoice}</p> 
+  <p>${resultMessage}</p>
+  `;
+  scoreDiv.innerText = `
+  <p>Player Score: ${playerScore}
+  </p> <p>Computer Score: ${computerScore}</p> `
 }
 
-playGame();
+if (playerScore === 5) {
+  resultDiv.innerHTML += '<p>Congratulations! You won the game!</p>';
+  resetGame();
+}
+else if (computerScore === 5) {
+  resultDiv.innerHTML += '<p>Game over! The computer won the game!</p>';
+  resetGame();
+}
+function resetGame()
+{ playerScore = 0; computerScore = 0; }
+
+const rockbutton = document.getElementById("rockbutton");
+const paperbutton = document.getElementById("paperbutton");
+const scissorbutton = document.getElementById("Scissorsbutton");
+
+rockbutton.addEventListener = ("click", () => playRound("Rock"));
+paperbutton.addEventListener = ("click", () => playRound("Paper"));
+scissorbutton.addEventListener = ("click", () => playRound("scissors"));
+
